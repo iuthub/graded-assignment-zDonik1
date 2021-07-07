@@ -13,6 +13,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [
+    'uses' => 'TaskController@getIndex',
+    'as' => 'index'
+]);
+
+Route::post('/add', [
+    'uses' => 'TaskController@postAddTask',
+    'as' => 'add'
+]);
+
+Route::get('/{id}/edit', [
+    'uses' => 'TaskController@getEditTask',
+    'as' => 'getEdit'
+]);
+
+Route::post('/edit', [
+    'uses' => 'TaskController@postEditTask',
+    'as' => 'edit'
+]);
+
+Route::get('/{id}/delete', [
+    'uses' => 'TaskController@getDeleteTask',
+    'as' => 'delete'
+]);
+
+Route::get('/home', function() {
+    return redirect()->route('index');
 });
+
+Auth::routes();
